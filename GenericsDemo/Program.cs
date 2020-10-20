@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace GenericsDemo
 {
@@ -10,13 +11,21 @@ namespace GenericsDemo
             double[] doubleArray = { 1.1, 1.2, 1.3, 1.4 };
             char[] charArray = { 'A', 'B', 'h', 'F' };
 
-            Program.ToPrint(intArray);
-            Program.ToPrint(doubleArray);
-            Program.ToPrint(charArray);
+            new PrintArray<int>(intArray).ToPrint();
+            new PrintArray<double>(doubleArray).ToPrint();
+            new PrintArray<char>(charArray).ToPrint();
         }
-        public static void ToPrint<TType>(TType[] inputArray)
+    }
+    public class PrintArray<TType>
+    {
+        private TType[] inputArray;
+        public PrintArray(TType[] inputArray)
         {
-            foreach(var element in inputArray)
+            this.inputArray = inputArray;
+        }
+        public void ToPrint()
+        {
+            foreach (var element in inputArray)
             {
                 Console.WriteLine(element);
             }
